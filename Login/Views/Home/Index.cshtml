@@ -1,0 +1,66 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>College Voting Website</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        .button-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #333;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+
+            .button:hover {
+                background-color: #555;
+            }
+
+            .button.register {
+                background-color: #007bff;
+            }
+
+                .button.register:hover {
+                    background-color: #0069d9;
+                }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Welcome to the College Voting Website</h1>
+        <div class="button-container">
+            <a class="button" a asp-controller="Login" asp-action="Login">Login</a>
+            <a class="button register" a asp-controller="Register" asp-action="CreateUser">Register</a>
+        </div>
+    </div>
+</body>
+
+</html>

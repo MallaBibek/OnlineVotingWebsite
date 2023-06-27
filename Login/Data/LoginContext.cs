@@ -12,6 +12,7 @@ namespace Login.Data
         }
         public DbSet<LoginModel> logins { get; set; }
         public DbSet<RegisterModel> Registers { get; set; }
+        public DbSet<VotesCalculation> Voteeee { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -24,6 +25,10 @@ namespace Login.Data
 
             builder.Entity<LoginModel>(a =>
             {  a.HasKey(x => x.Id);
+            });
+
+            builder.Entity<VotesCalculation>(a => {
+                a.HasKey(x=>x.key);
             });
         }
 

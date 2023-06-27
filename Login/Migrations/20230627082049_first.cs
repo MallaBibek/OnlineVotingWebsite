@@ -4,7 +4,7 @@
 
 namespace Login.Migrations
 {
-    public partial class Login : Migration
+    public partial class first : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -40,6 +40,24 @@ namespace Login.Migrations
                 {
                     table.PrimaryKey("PK_Registers", x => x.Id);
                 });
+
+            migrationBuilder.CreateTable(
+                name: "Voteeee",
+                columns: table => new
+                {
+                    key = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    NepaliCongress = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    RastriyaPrajatantraParty = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    JanamatParty = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    RastriyaSwatantraParty = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CommunistPartyofNepal = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    VotedBy = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Voteeee", x => x.key);
+                });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -49,6 +67,9 @@ namespace Login.Migrations
 
             migrationBuilder.DropTable(
                 name: "Registers");
+
+            migrationBuilder.DropTable(
+                name: "Voteeee");
         }
     }
 }

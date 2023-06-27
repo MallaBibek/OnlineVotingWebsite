@@ -74,6 +74,37 @@ namespace Login.Migrations
 
                     b.ToTable("Registers");
                 });
+
+            modelBuilder.Entity("Login.Models.VotesCalculation", b =>
+                {
+                    b.Property<int>("key")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("key"), 1L, 1);
+
+                    b.Property<string>("CommunistPartyofNepal")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("JanamatParty")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NepaliCongress")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("RastriyaPrajatantraParty")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("RastriyaSwatantraParty")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("VotedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("key");
+
+                    b.ToTable("Voteeee");
+                });
 #pragma warning restore 612, 618
         }
     }

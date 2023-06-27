@@ -23,7 +23,7 @@ namespace Login.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult Login(RegisterModel registerr)
+        public IActionResult Login(RegisterModel registerr,LoginModel Logiii)
         {
             var AuthenticatedUser = _context.Registers.FirstOrDefault(u => u.UserName == registerr.UserName);
             using var sha256 = SHA256.Create();
@@ -31,6 +31,7 @@ namespace Login.Controllers
             byte[] hashBytes = sha256.ComputeHash(passwordBytes);
             string hashedPassword = Convert.ToBase64String(hashBytes);
             registerr.Password = hashedPassword;
+       
 
 
             if (AuthenticatedUser is not null && registerr.Password == AuthenticatedUser.Password)

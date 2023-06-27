@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Login.Migrations
 {
     [DbContext(typeof(LoginContext))]
-    [Migration("20230623050615_Login")]
-    partial class Login
+    [Migration("20230627082049_first")]
+    partial class first
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -75,6 +75,37 @@ namespace Login.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Registers");
+                });
+
+            modelBuilder.Entity("Login.Models.VotesCalculation", b =>
+                {
+                    b.Property<int>("key")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("key"), 1L, 1);
+
+                    b.Property<string>("CommunistPartyofNepal")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("JanamatParty")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NepaliCongress")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("RastriyaPrajatantraParty")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("RastriyaSwatantraParty")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("VotedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("key");
+
+                    b.ToTable("Voteeee");
                 });
 #pragma warning restore 612, 618
         }

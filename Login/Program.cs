@@ -1,5 +1,8 @@
 using Login.Data;
+using Login.TokenServices;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 
 namespace Login
 {
@@ -7,7 +10,13 @@ namespace Login
     {
         public static void Main(string[] args)
         {
+
             var builder = WebApplication.CreateBuilder(args);
+            builder.Services.AddMvc();
+            builder.Services.AddHttpContextAccessor();
+            builder.Services.AddTransient<ITokenService, TokenService>();
+
+
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
@@ -15,8 +24,18 @@ namespace Login
 
                 builder.Configuration.GetConnectionString("DefaultConnection")
                 ));
+            builder.Services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            });
+
+
+
+
 
             var app = builder.Build();
+
 
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())

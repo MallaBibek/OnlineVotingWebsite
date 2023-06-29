@@ -1,6 +1,7 @@
 ﻿using Login.Data;
 using Login.Models;
 using Login.TokenServices;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Win32;
@@ -21,11 +22,12 @@ namespace Login.Controllers
             return View();
 
         }
-
+ 
         [HttpPost]
         public IActionResult Vote(VotesCalculation qw)
         {
             var userName = _tokenservice.GetUsernameFromToken();
+           
             qw.VotedBy = userName;
             _context.Voteeee.Add(qw);
             var result =_context.SaveChanges();

@@ -13,10 +13,12 @@ namespace Login.Controllers
     {
         private readonly LoginContext _context;
         private readonly ITokenService _tokenservice;
+      
         public LoginController(LoginContext context, ITokenService tokenservice)
         {
             _context = context;
             _tokenservice = tokenservice;
+        
         }
         public IActionResult Index()
         {
@@ -29,11 +31,13 @@ namespace Login.Controllers
         [HttpPost]
         public IActionResult Login(RegisterModel registerr)
         {
-          
+
             var AuthenticatedUser = _context.Registers.FirstOrDefault(u => u.UserName == registerr.UserName);
-            //if (AuthenticatedUser.UserName == V.VotedBy) 
+
+
+            //if (username.VotedBy is not null) 
             //{
-            //    return RedirectToAction("Hello", "Home");
+            //   return RedirectToAction("Hello", "Home");
             //}
             //else { 
             using var sha256 = SHA256.Create();
@@ -43,6 +47,7 @@ namespace Login.Controllers
             registerr.Password = hashedPassword;
 
             var token = _tokenservice.CreateToken(registerr);
+
 
 
             var cookieOptions = new CookieOptions
@@ -55,18 +60,31 @@ namespace Login.Controllers
 
 
             httpContextAccessor.HttpContext.Response.Cookies.Append("TokenKey", token, cookieOptions);
+            //   var username = _context.Voteeee.FirstOrDefault(x => x.VotedBy == registerr.UserName);
+            var userName = _tokenservice.GetUsernameFromToken();
+            var result = _context.Voteeee.FirstOrDefault(x => x.VotedBy == userName);
 
-            if (AuthenticatedUser is not null && registerr.Password == AuthenticatedUser.Password)
+            if (result is null)
             {
 
-                return RedirectToAction("Vote", "Vote");
+                if (AuthenticatedUser is not null && registerr.Password == AuthenticatedUser.Password)
+                {
+
+                    return RedirectToAction("Vote", "Vote");
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Invalid username or password");
+                }
+                return View(registerr);
             }
-            else
-            {
-                ModelState.AddModelError("", "Invalid username or password");
+            else {
+
+                return RedirectToAction("Hello", "Home");
+
             }
-            return View(registerr);
-            //}
         }
+       
+        //}
     }
 }

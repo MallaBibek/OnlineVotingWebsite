@@ -1,5 +1,7 @@
 ﻿using Login.Data;
+using Login.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 
 namespace Login.Controllers
@@ -12,18 +14,18 @@ namespace Login.Controllers
         {
             _context = AppDbContext;
         }
+        public ActionResult ExecuteStoredProc()
 
-        public ActionResult CountedVote()
+        {
+            return View();
+
+        }
+
+        [HttpPost]
+        public ActionResult ExecuteStoredProc(string partyValue)
         {
 
-            /*var query = "SELECT COUNT(NepaliCongress) AS CountedVote FROM [dbo].[Voteeee]";
-            var countedVote = _context.Voteeee.FromSqlRaw(query).FirstOrDefault();*/
-            var countedVote = _context.Voteeee.Count();
-
-            ViewBag.CountedVote = countedVote;
-
-           
-            
+            var result = _context.Voteeee.FromSqlRaw($"EXEC testing").ToList();
 
             return View();
         }

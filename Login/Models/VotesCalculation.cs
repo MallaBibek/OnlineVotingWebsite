@@ -14,4 +14,8 @@ namespace Login.Models
 
 
     }
+    public class VoteCount
+    {
+        public int VotesCount { get; set; }
+    }
 }

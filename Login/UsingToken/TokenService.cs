@@ -64,7 +64,7 @@ namespace Login.TokenServices
 
 
             if (!string.IsNullOrEmpty(encodedToken))
-            {
+              {
                 var tokenHandler = new JwtSecurityTokenHandler();
                 var token = tokenHandler.ReadToken(encodedToken) as JwtSecurityToken;
 

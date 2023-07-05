@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Login.Migrations
 {
     [DbContext(typeof(LoginContext))]
-    [Migration("20230627082049_first")]
+    [Migration("20230705105242_first")]
     partial class first
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -77,6 +77,14 @@ namespace Login.Migrations
                     b.ToTable("Registers");
                 });
 
+            modelBuilder.Entity("Login.Models.VoteCount", b =>
+                {
+                    b.Property<int>("VotesCount")
+                        .HasColumnType("int");
+
+                    b.ToTable("VoteCounts");
+                });
+
             modelBuilder.Entity("Login.Models.VotesCalculation", b =>
                 {
                     b.Property<int>("key")
@@ -102,6 +110,9 @@ namespace Login.Migrations
 
                     b.Property<string>("VotedBy")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("VotesCount")
+                        .HasColumnType("int");
 
                     b.HasKey("key");
 

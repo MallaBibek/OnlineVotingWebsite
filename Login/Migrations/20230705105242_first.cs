@@ -42,6 +42,16 @@ namespace Login.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "VoteCounts",
+                columns: table => new
+                {
+                    VotesCount = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Voteeee",
                 columns: table => new
                 {
@@ -52,7 +62,8 @@ namespace Login.Migrations
                     JanamatParty = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     RastriyaSwatantraParty = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CommunistPartyofNepal = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    VotedBy = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    VotedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    VotesCount = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -67,6 +78,9 @@ namespace Login.Migrations
 
             migrationBuilder.DropTable(
                 name: "Registers");
+
+            migrationBuilder.DropTable(
+                name: "VoteCounts");
 
             migrationBuilder.DropTable(
                 name: "Voteeee");

@@ -75,6 +75,14 @@ namespace Login.Migrations
                     b.ToTable("Registers");
                 });
 
+            modelBuilder.Entity("Login.Models.VoteCount", b =>
+                {
+                    b.Property<int>("VotesCount")
+                        .HasColumnType("int");
+
+                    b.ToTable("VoteCounts");
+                });
+
             modelBuilder.Entity("Login.Models.VotesCalculation", b =>
                 {
                     b.Property<int>("key")
@@ -100,6 +108,9 @@ namespace Login.Migrations
 
                     b.Property<string>("VotedBy")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("VotesCount")
+                        .HasColumnType("int");
 
                     b.HasKey("key");
 

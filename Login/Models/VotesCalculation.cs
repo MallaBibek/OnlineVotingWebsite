@@ -11,6 +11,7 @@ namespace Login.Models
         public string RastriyaSwatantraParty { get; set; }
         public string CommunistPartyofNepal { get; set; }
         public string VotedBy { get; set; }
+        public int VotesCount { get; set; }
 
 
     }

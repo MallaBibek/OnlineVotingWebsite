@@ -1,4 +1,13 @@
-﻿<form action="/Couting/ExecuteStoredProc" method="post">
+﻿
+@model VotesCalculation
+
+<form action="/Couting/ExecuteStoredProc" method="post">
     <input type="text" name="partyValue" />
-    <button type="submit">CountedVot</button>
+    <button type="submit">Count Votes</button>
 </form>
+
+<h1>Counted Votes: @Model.VotesCount</h1>
+
+
+
+

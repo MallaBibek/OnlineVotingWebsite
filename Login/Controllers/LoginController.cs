@@ -63,6 +63,7 @@ namespace Login.Controllers
             //   var username = _context.Voteeee.FirstOrDefault(x => x.VotedBy == registerr.UserName);
             var userName = _tokenservice.GetUsernameFromToken();
             var result = _context.Voteeee.FirstOrDefault(x => x.VotedBy == userName);
+            
 
             if (result is null)
             {

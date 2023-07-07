@@ -18,7 +18,8 @@ namespace Login.Controllers
         public ActionResult ExecuteStoredProc()
 
         {
-            return View();
+            List<VotesCalculation> list = new(); 
+            return View(list);
 
         }
 
@@ -40,11 +41,10 @@ namespace Login.Controllers
             //string sql = "Insert into Voteeee (VotesCount) values (@partyValue)";
             string sql = "ToCount";
             var response = _dapperSql.LoadSPDataListWithParam<VotesCalculation>(sql, parameters);
-            
-            if (response is not null)
-                return RedirectToAction("Hello", "Home");
 
-            return View();
+            
+
+            return View(response);
         }
 
 

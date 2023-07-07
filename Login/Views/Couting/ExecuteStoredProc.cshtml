@@ -1,10 +1,49 @@
-﻿
-@model VotesCalculation
+﻿@model IEnumerable<VotesCalculation>
 
-<form action="/Couting/ExecuteStoredProc" method="post">
+@*<form action="/Couting/ExecuteStoredProc" method="post">
     <input type="text" name="partyValue" />
     <button type="submit">Count Votes</button>
+</form>*@
+
+
+<form action="/Couting/ExecuteStoredProc" method="post">
+    <select name="partyValue">
+        <option value="NepaliCongress">NepaliCongress</option>
+        <option value="RastriyaPrajatantraParty">RastriyaPrajatantraParty</option>
+        <option value="JanamatParty">JanamatParty</option>
+        <option value="RastriyaSwatantraParty">RastriyaSwatantraParty</option>
+        <option value="CommunistPartyofNepal">CommunistPartyofNepal</option>
+ 
+        
+    </select>
+    <button type="submit">Count Votes</button>
 </form>
+
+
+<div class="box">
+    <div class="box-body">
+        <table>
+            <thead>
+                <tr>
+                    
+                    <th>Total Voted Secured</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                       
+                        <td>
+                            @item.VotesCount
+                        </td>
+                    </tr>
+                } 
+            </tbody>
+        </table>
+    </div>
+
+</div>
 
 @*<h1>Counted Votes: @Model.VotesCount</h1>*@
 

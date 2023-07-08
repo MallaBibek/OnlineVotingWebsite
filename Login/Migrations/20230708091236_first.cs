@@ -57,13 +57,8 @@ namespace Login.Migrations
                 {
                     key = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    NepaliCongress = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    RastriyaPrajatantraParty = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    JanamatParty = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    RastriyaSwatantraParty = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CommunistPartyofNepal = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     VotedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    VotesCount = table.Column<int>(type: "int", nullable: false)
+                    VotesCount = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {

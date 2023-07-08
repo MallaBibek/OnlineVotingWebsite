@@ -39,7 +39,7 @@ namespace Login.Controllers
             var parameters = new DynamicParameters();
             parameters.Add("@party", partyValue);
             //string sql = "Insert into Voteeee (VotesCount) values (@partyValue)";
-            string sql = "ToCount";
+            string sql = "Counting";
             var response = _dapperSql.LoadSPDataListWithParam<VotesCalculation>(sql, parameters);
 
             

@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Login.Migrations
 {
     [DbContext(typeof(LoginContext))]
-    [Migration("20230705105242_first")]
+    [Migration("20230708091236_first")]
     partial class first
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -93,26 +93,11 @@ namespace Login.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("key"), 1L, 1);
 
-                    b.Property<string>("CommunistPartyofNepal")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("JanamatParty")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("NepaliCongress")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("RastriyaPrajatantraParty")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("RastriyaSwatantraParty")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("VotedBy")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("VotesCount")
-                        .HasColumnType("int");
+                    b.Property<string>("VotesCount")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("key");
 

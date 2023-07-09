@@ -4,7 +4,7 @@
 
 namespace Login.Migrations
 {
-    public partial class first : Migration
+    public partial class VotingApp : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -58,7 +58,8 @@ namespace Login.Migrations
                     key = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     VotedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    VotesCount = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    VotesCount = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CountedVotes = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {

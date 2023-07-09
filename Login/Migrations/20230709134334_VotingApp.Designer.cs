@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Login.Migrations
 {
     [DbContext(typeof(LoginContext))]
-    [Migration("20230708091236_first")]
-    partial class first
+    [Migration("20230709134334_VotingApp")]
+    partial class VotingApp
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -92,6 +92,9 @@ namespace Login.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("key"), 1L, 1);
+
+                    b.Property<int>("CountedVotes")
+                        .HasColumnType("int");
 
                     b.Property<string>("VotedBy")
                         .HasColumnType("nvarchar(max)");

@@ -1,49 +1,148 @@
 ﻿@model VotesCalculation
 
-<form method="post">
+<!DOCTYPE html>
+<html lang="en">
 
-    <div class="border p-3 mt-4">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vote Wisely</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url("https://images.unsplash.com/photo-1517524285303-d6fc683dddf8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1935&q=80");
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
 
-        <div class="row pb-2">
-            <h2 class="text-primary"> Please Vote Wisely</h2>
-            <h3 class="text-primary"> Choose The One You Want To Make President </h3>
-        </div>
-        <div class="mb-3">
-            
-            <input type="radio" name="VotesCount" value="NepaliCongress" asp-for="VotesCount">
-            <label asp-for="VotesCount">Nepali Congress</label>
-        </div>
-        <div class="mb-3">
-            
-            <input type="radio" name="VotesCount" value="Rastriya Prajatantra Party" asp-for="VotesCount">
-            <label asp-for="VotesCount">Rastriya Prajatantra Party</label>
-        </div>
-        <div class="mb-3">
+        .container {
+            max-width: 600px;
+            padding: 30px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 8px;
+        }
 
-            <input type="radio" name="VotesCount" value="JanamatParty" asp-for="VotesCount">
-            <label asp-for="VotesCount">Janamat Party</label>
-        </div>
-        <div class="mb-3">
-           
-            <input type="radio" name="VotesCount" value="RastriyaSwatantraParty" asp-for="VotesCount">
-            <label asp-for="VotesCount">Rastriya Swatantra Party</label>
-        </div>
-        <div class="mb-3">
-           
-            <input type="radio" name="VotesCount" value="CommunistPartyofNepal" asp-for="VotesCount">
-            <label asp-for="VotesCount">CommunistPartyofNepal</label>
-        </div>
-        <input type="submit" class="btn btn-primary" style="width:150px" value="Vote" >
+        h2, h3 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+        }
 
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 6px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+            text-align: center;
+        }
+
+        .btn-primary,
+        .btn-secondary {
+            display: block;
+            width: 150px;
+            margin: 0 auto;
+            margin-top: 10px;
+            padding: 10px;
+            text-align: center;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .btn-primary:hover,
+        .btn-secondary:hover {
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+        }
+
+        .btn-secondary {
+            background-color: #6c757d;
+        }
+
+        .box {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 4px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            background-color: #f8f9fa;
+        }
+
+        td,
+        th {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .center {
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <form method="post">
+            <div class="border p-3 mt-4">
+                <div class="row pb-2">
+                    <h2 class="text-primary center">Please Vote Wisely</h2>
+                    <h3 class="text-primary center">Choose The One You Want To Make President</h3>
+                </div>
+                <div class="mb-3">
+                    <input type="radio" name="VotesCount" value="NepaliCongress" asp-for="VotesCount">
+                    <label asp-for="VotesCount" class="center">Nepali Congress</label>
+                </div>
+                <div class="mb-3">
+                    <input type="radio" name="VotesCount" value="Rastriya Prajatantra Party" asp-for="VotesCount">
+                    <label asp-for="VotesCount" class="center">Rastriya Prajatantra Party</label>
+                </div>
+                <div class="mb-3">
+                    <input type="radio" name="VotesCount" value="JanamatParty" asp-for="VotesCount">
+                    <label asp-for="VotesCount" class="center">Janamat Party</label>
+                </div>
+                <div class="mb-3">
+                    <input type="radio" name="VotesCount" value="RastriyaSwatantraParty" asp-for="VotesCount">
+                    <label asp-for="VotesCount" class="center">Rastriya Swatantra Party</label>
+                </div>
+                <div class="mb-3">
+                    <input type="radio" name="VotesCount" value="CommunistPartyofNepal" asp-for="VotesCount">
+                    <label asp-for="VotesCount" class="center">Communist Party of Nepal</label>
+                </div>
+                <input type="submit" class="btn btn-primary center" style="width:150px" value="Vote">
+            </div>
+        </form>
     </div>
+</body>
 
-
-</form>
-<style>
-
-
-    .center {
-        text-align: center;
-    }
-
-</style>
+</html>

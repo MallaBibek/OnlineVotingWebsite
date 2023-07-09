@@ -8,20 +8,30 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f2f2f2;
+            background-image: url("https://images.unsplash.com/photo-1517524285303-d6fc683dddf8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1935&q=80");
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
             margin: 0;
             padding: 0;
-        }
-
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
         }
 
         h1 {
             text-align: center;
-            color: #333;
+            color: purple;
+            font-size: 36px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+        }
+
+        .container {
+            max-width: 800px;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 8px;
         }
 
         .button-container {
@@ -50,6 +60,14 @@
                 .button.register:hover {
                     background-color: #0069d9;
                 }
+
+        .voting-img {
+            display: block;
+            margin: 0 auto;
+            max-width: 400px;
+            height: auto;
+            margin-top: 50px;
+        }
     </style>
 </head>
 
@@ -61,6 +79,7 @@
             <a class="button register" a asp-controller="Register" asp-action="CreateUser">Register</a>
             <a class="button register" a asp-controller="Couting" asp-action="ExecuteStoredProc">VoteCount</a>
         </div>
+        <img class="voting-img" src="https://images.unsplash.com/photo-1604451372323-158c45058d10?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Voting Image">
     </div>
 </body>
 

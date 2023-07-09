@@ -1,59 +1,165 @@
-﻿
-@model IEnumerable<VotesCalculation>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
+﻿@model IEnumerable<VotesCalculation>
+<!DOCTYPE html>
+<html lang="en">
 
-<div class="container">
-    <h2>Vote Counting</h2>
-    <hr />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vote Counting</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url("https://images.unsplash.com/photo-1517524285303-d6fc683dddf8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1935&q=80");
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
 
-    <div class="row">
-        <div class="col-md-6">
-            <form action="/Couting/ExecuteStoredProc" method="post">
-                <div class="form-group">
-                    <label for="partyValue">Select Party:</label>
-                    <select class="form-control" name="partyValue">
-                        <option value="NepaliCongress">Nepali Congress</option>
-                        <option value="RastriyaPrajatantraParty">Rastriya Prajatantra Party</option>
-                        <option value="JanamatParty">Janamat Party</option>
-                        <option value="RastriyaSwatantraParty">Rastriya Swatantra Party</option>
-                        <option value="CommunistPartyofNepal">Communist Party of Nepal</option>
-                    </select>
-                </div>
-                <button type="submit" class="btn btn-primary">Count Votes</button>
-                <a asp-controller="Home" asp-action="Index" class="btn btn-secondary">Back to Home</a>
-            </form>
+        .container {
+            max-width: 500px;
+            padding: 30px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 8px;
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+
+       
+            .form-group
+
+        {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+
+        .form-control {
+            width: 100%;
+            padding: 6px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+            text-align: center;
+        }
+
+        .btn-primary,
+        .btn-secondary {
+            display: block;
+            width: 150px;
+            margin: 0 auto;
+            margin-top: 10px;
+            padding: 10px;
+            text-align: center;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-left: -15px;
+            margin-right: -15px;
+        }
+
+        .btn-primary:hover,
+        .btn-secondary:hover {
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+        }
+
+        .btn-secondary {
+            background-color: #6c757d;
+        }
+
+        .box {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 4px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            background-color: #f8f9fa;
+        }
+
+        td,
+        th {
+            padding: 8px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2>Vote Counting</h2>
+        <hr />
+        <div class="row">
+            <div class="col-md-6">
+                <form action="/Couting/ExecuteStoredProc" method="post">
+                    <div class="form-group">
+                        <label for="partyValue">Select Party:</label>
+                        <select class="form-control" name="partyValue">
+                            <option value="" selected>Select Party</option>
+                            <option value="NepaliCongress">Nepali Congress</option>
+                            <option value="RastriyaPrajatantraParty">Rastriya Prajatantra Party</option>
+                            <option value="JanamatParty">Janamat Party</option>
+                            <option value="RastriyaSwatantraParty">Rastriya Swatantra Party</option>
+                            <option value="CommunistPartyofNepal">Communist Party of Nepal</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Count Votes</button>
+                    <a asp-controller="Home" asp-action="Index" class="btn btn-secondary">Back to Home</a>
+                </form>
+            </div>
         </div>
-    </div>
-
-    <hr />
-
-    <div class="row">
-        <div class="col-md-6">
-            <div class="box">
-                <div class="box-body">
-                    <h4>Total Voted Secured</h4>
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>Counted Votes</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (var item in Model)
-                            {
+        <hr />
+        <div class="row">
+            <div class="col-md-6">
+                <div class="box">
+                    <div class="box-body">
+                        <h4 style="text-align: center;">Total Voted Secured</h4>
+                        <table class="table">
+                            <thead>
                                 <tr>
-                                    <td>@item.CountedVotes</td>
+                                    <th>Counted Votes</th>
                                 </tr>
-                            }
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>@item.CountedVotes</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
+</body>
 
-
-
-
-
+</html>

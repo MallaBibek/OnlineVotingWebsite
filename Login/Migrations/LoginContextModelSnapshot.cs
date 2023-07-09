@@ -91,6 +91,9 @@ namespace Login.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("key"), 1L, 1);
 
+                    b.Property<int>("CountedVotes")
+                        .HasColumnType("int");
+
                     b.Property<string>("VotedBy")
                         .HasColumnType("nvarchar(max)");
 

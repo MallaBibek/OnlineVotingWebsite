@@ -7,7 +7,51 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>College Voting Website</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/intro.js/4.0.0/introjs.min.css" rel="stylesheet">
     <style>
+      
+        .introjs-helperLayer {
+            background-color: rgba(0, 0, 0, 0.8); 
+        }
+
+        
+
+
+
+        .introjs-arrow {
+            border-color: #fff transparent transparent;
+        }
+
+        .introjs-tooltipbuttons {
+            text-align: right;
+        }
+
+            .introjs-tooltipbuttons button {
+                background-color: #007bff;
+                color: #fff;
+                border: none;
+                border-radius: 3px;
+                padding: 5px 10px;
+                margin-left: 5px;
+                cursor: pointer;
+            }
+
+                .introjs-tooltipbuttons button:hover {
+                    background-color: #0056b3;
+                }
+
+        
+        .hand{
+            position: absolute;
+            top: -40px; 
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40px; 
+            height: 40px;
+            background-image: url('file:///C:/Users/DELL/Desktop/project/OnlineVotingWebsite/Login/hand.png');
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
         body {
             font-family: Arial, sans-serif;
             background-image: url("https://images.unsplash.com/photo-1517524285303-d6fc683dddf8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1935&q=80");
@@ -23,7 +67,7 @@
         }
 
         .container {
-            max-width: 400px;
+            max-width:454px;
             padding: 30px;
             background-color: rgba(255, 255, 255, 0.8);
             border-radius: 8px;
@@ -72,7 +116,9 @@
         .btn-secondary {
             background-color: #6c757d;
         }
+
     </style>
+    @* <script src="https://www.google.com/recaptcha/api.js" async defer></script> *@
 </head>
 
 <body>
@@ -84,27 +130,64 @@
             <div class="border p-3 mt-4">
                 @Html.AntiForgeryToken()
 
-                <div class="form-group">
+                <div class="form-group username">
                     @Html.LabelFor(m => m.UserName)
                     @Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })
                     @Html.ValidationMessageFor(m => m.UserName)
                 </div>
 
-                <div class="form-group">
+                <div class="form-group password">
                     @Html.LabelFor(m => m.Password)
                     @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
                     @Html.ValidationMessageFor(m => m.Password)
                 </div>
-
-                <div class="form-group" style="margin-top: 10px; text-align: center;">
+                @if (ViewBag.appkey == "y")
+                {
+                    <div class="form-group" style="margin-top: 10px; text-align: center;">
+                        <div class="g-recaptcha" data-sitekey="6LeL3mIpAAAAAPmkwQqwtFLwGHMfoz66RKw2NpF_"></div>
+                    </div>
+                }
+                
+                <div class="form-group login" style="margin-top: 10px; text-align: center;">
                     <input type="submit" value="Login" class="btn btn-primary" asp-controller="Login" asp-action="Login" />
                 </div>
                 <div class="form-group" style="margin-top: 10px; text-align: center;">
                     <a asp-controller="Home" asp-action="Index" class="btn btn-secondary">Back To Home</a>
                 </div>
+                <div>
+                   <button id="download">Download</button>
+                </div>
             </div>
+           
+
         }
     </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/intro.js/4.0.0/intro.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            introJs().setOptions({
+                steps: [
+                    {
+                        intro: "Welcome to Voting Web site"
+                    },
+                    {
+                        element: document.querySelector('.username'),
+                        intro:'Please fill userName'
+                    },
+                    {
+                        element: document.querySelector('.password'),
+                        intro: 'Please fill Your Password'
+                    },
+                    {
+                        element: document.querySelector('.login'),
+                        intro: 'Click on this login'
+                    }
+                ]
+            }).start();
+        });
+    </script>
 </body>
+
+
 
 </html>

@@ -2,7 +2,7 @@
 using Login.Data;
 using Login.Models;
 using Microsoft.AspNetCore.Mvc;
-
+using Microsoft.Data.SqlClient;
 
 namespace Login.Controllers
 {
@@ -35,17 +35,21 @@ namespace Login.Controllers
         [HttpPost]
         public ActionResult ExecuteStoredProc(string partyValue)
         {
-
             var parameters = new DynamicParameters();
             parameters.Add("@party", partyValue);
-            //string sql = "Insert into Voteeee (VotesCount) values (@partyValue)";
-            string sql = "Counting";
-            var response = _dapperSql.LoadSPDataListWithParam<VotesCalculation>(sql, parameters);
 
-            
+            _dapperSql.LogParametersToApplicationInsights("Counting", parameters);
 
-            return View(response);
+            var result = _dapperSql.ExecuteStoredProcedure("Counting",
+                reader => new VotesCalculation
+                {
+                    CountedVotes = Convert.ToInt32(reader["PartyCount"])
+                },
+                parameters
+            );
+            return View(result);
         }
+
 
 
     }

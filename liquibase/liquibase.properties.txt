@@ -1,5 +1,5 @@
 changeLogFile=classpath:db/changelog/db.changelog-master.xml
 url=jdbc:sqlserver://localhost:1433;databaseName=yourDatabase
-username=yourUsername
-password=yourPassword
+username=
+password=
 driver=com.microsoft.sqlserver.jdbc.SQLServerDriver

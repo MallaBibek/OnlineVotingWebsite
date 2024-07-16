@@ -1,5 +1,6 @@
 using Login.Data;
 using Login.TokenServices;
+using Microsoft.ApplicationInsights.DependencyCollector;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
@@ -20,6 +21,23 @@ namespace Login
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+
+            if (builder.Configuration["recaptchaFlag"] == "y")
+            { 
+            
+            
+            }
+            if (builder.Configuration["ApplicationInsights:EnableApplicationInsight"] == "y")
+            {
+                builder.Services.AddApplicationInsightsTelemetry();
+                builder.Services.ConfigureTelemetryModule<DependencyTrackingTelemetryModule>((module, o) =>
+                {
+                    module.EnableSqlCommandTextInstrumentation = true;
+                });
+            }
+
+
+
             builder.Services.AddDbContext<LoginContext>(options => options.UseSqlServer(
 
                 builder.Configuration.GetConnectionString("DefaultConnection")

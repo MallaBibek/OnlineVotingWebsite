@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Login.Migrations
 {
     [DbContext(typeof(LoginContext))]
-    [Migration("20230709134334_VotingApp")]
-    partial class VotingApp
+    [Migration("20240213070744_first")]
+    partial class first
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

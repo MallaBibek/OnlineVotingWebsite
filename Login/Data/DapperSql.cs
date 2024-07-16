@@ -1,7 +1,8 @@
 ﻿using Dapper;
 using Newtonsoft.Json.Linq;
 using System.Data;
-using System.Data.SqlClient;
+using Microsoft.Data.SqlClient;
+using Microsoft.ApplicationInsights;
 
 namespace Login.Data
 {
@@ -72,6 +73,8 @@ namespace Login.Data
                 return cnn.Query<T>(sql, p).SingleOrDefault();
             }
         }
+
+
         public DataTable ExecuteDataTable(string sql)
         {
             using (SqlConnection con = new SqlConnection(GetConnectionString()))
@@ -87,6 +90,7 @@ namespace Login.Data
                 }
             }
         }
+
         public int RunSQLWithParam(string sql, DynamicParameters p)
         {
             using (IDbConnection cnn = new SqlConnection(GetConnectionString()))
@@ -94,6 +98,56 @@ namespace Login.Data
                 return cnn.Execute(sql, p);
             }
         }
+        public List<T> ExecuteStoredProcedure<T>(string storedProcedureName, Func<SqlDataReader, T> mapFunction, DynamicParameters parameters = null)
+        {
+            using (SqlConnection con = new SqlConnection(GetConnectionString()))
+            {
+                using (SqlCommand cmd = new SqlCommand())
+                {
+                    cmd.Connection = con;
+                    cmd.CommandText = storedProcedureName;
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    if (parameters != null)
+                    {
+                        cmd.Parameters.AddRange(parameters.ParameterNames.Select(name => new SqlParameter(name, parameters.Get<object>(name))).ToArray());
+
+                        // Log parameters to Application Insights
+                        LogParametersToApplicationInsights(storedProcedureName, parameters);
+                    }
+                    
+                    con.Open();
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        List<T> result = new List<T>();
+
+                        while (reader.Read())
+                        {
+                            T item = mapFunction(reader);
+                            result.Add(item);
+                        }
+                        return result;
+                    }
+                }
+            }
+        }
+
+        public void LogParametersToApplicationInsights(string storedProcedureName, DynamicParameters parameters)
+        {
+            
+            TelemetryClient telemetryClient = new ();
+
+            telemetryClient.TrackTrace($"Executing stored procedure: {storedProcedureName}");
+
+           
+            foreach (var paramName in parameters.ParameterNames)
+            {
+                var paramValue = parameters.Get<object>(paramName);
+                telemetryClient.TrackTrace($"Parameter: {paramName} Value: {paramValue}");
+                Console.WriteLine( $"ParameterName:{paramName} Value:{paramValue}");
+            }
+        }
+
     }
 
 }

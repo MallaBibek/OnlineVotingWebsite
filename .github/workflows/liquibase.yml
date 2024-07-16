@@ -1,0 +1,38 @@
+name: Liquibase Update
+
+on:
+  push:
+    branches:
+      - Master
+
+jobs:
+  update-db:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Setup JDK
+        uses: actions/setup-java@v2
+        with:
+          java-version: '11'
+
+      - name: Install Liquibase
+        run: |
+          wget https://github.com/liquibase/liquibase/releases/download/v4.8.0/liquibase-4.8.0.tar.gz
+          tar -xzf liquibase-4.8.0.tar.gz
+          mkdir -p $GITHUB_WORKSPACE/liquibase
+          mv liquibase $GITHUB_WORKSPACE/liquibase/
+          echo "liquibase.home=$GITHUB_WORKSPACE/liquibase" >> $GITHUB_WORKSPACE/liquibase/liquibase.properties
+
+      - name: Run Liquibase Update
+        env:
+          LIQUIBASE_COMMAND: update
+          LIQUIBASE_URL: jdbc:sqlserver://localhost:1433;databaseName=.  
+          LIQUIBASE_USERNAME: ${{ secrets.DB_USERNAME }}
+          LIQUIBASE_PASSWORD: ${{ secrets.DB_PASSWORD }}
+        run: |
+          liquibase --changeLogFile=liquibase/db/changelog/db.changelog-master.xml $LIQUIBASE_COMMAND \
+                    --url="jdbc:sqlserver://localhost:1433;databaseName=yourDatabase" \
+                    --username=$LIQUIBASE_USERNAME --password=$LIQUIBASE_PASSWORD

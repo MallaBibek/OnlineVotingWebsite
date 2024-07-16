@@ -5,8 +5,8 @@
     xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
     http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
 
-    <changeSet id="1" author="yourName">
-        <createTable tableName="example_table">
+    <changeSet id="2" author="Bibek">
+        <createTable tableName="liquitest">
             <column name="id" type="int">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
